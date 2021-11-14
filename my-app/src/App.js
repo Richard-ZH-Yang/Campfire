@@ -2,15 +2,19 @@
 import { BrowserRouter as Routes ,Route } from 'react-router-dom';
 import './App.css';
 
-
+import MainPage from "./containers/MainPage";
 import AddTagPage from "./containers/addTagPage";
 
 function App() {
   return (
     <div className="App">
       {/* <Header /> */}
-      <AddTagPage></AddTagPage>
-      <MainPage/>
+{/*   
+        <Routes>
+          <Route path="/addTagPage"  component={AddTagPage} />;
+        </Routes>  */}
+        <AddTagPage></AddTagPage>
+        <MainPage></MainPage>
     </div>
   );
 }
