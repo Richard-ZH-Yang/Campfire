@@ -1,6 +1,11 @@
 const express = require('express');
 const mysql = require('mysql');
 
+var uuid = require('uuid');
+
+const currentDate = new Date();
+const timestamp = currentDate.getTime();
+
 // Create connection
 const db = mysql.createConnection({
     host     : 'localhost',
@@ -12,7 +17,7 @@ const db = mysql.createConnection({
 // Connect
 db.connect((err) => {
     if(err){
-        // throw err;
+        throw err;
     }
     console.log('MySql Connected...');
 });
@@ -23,7 +28,7 @@ const app = express();
 app.get('/createdb', (req, res) => {
     let sql = 'CREATE DATABASE nodemysql';
     db.query(sql, (err, result) => {
-        // if(err) throw err;
+        if(err) throw err;
         console.log(result);
         res.send('Database created...');
     });
@@ -33,49 +38,43 @@ app.get('/createdb', (req, res) => {
 app.get('/createfolkloretable', (req, res) => {
     let sql = 'CREATE TABLE folklore(id VARCHAR(100) , tag VARCHAR(100), content VARCHAR(300), date DATE, PRIMARY KEY(id))';
     db.query(sql, (err, result) => {
-        // if(err) throw err;
+        if(err) throw err;
         console.log(result);
         res.send('folklore table created...');
     });
 });
 
 // Insert post 1
-app.get('/addpost1', (req, res) => {
-    let post = {title:'Post One', body:'This is post number one'};
-    let sql = 'INSERT INTO posts SET ?';
+app.get('/addfolkflore/:tag/:content', (req, res) => {
+    // let tag = ${req.params.tag};
+    // let content = req.value.get('content');
+    let uid = uuid.v4();
+    let date = timestamp;
+    let post = {id:uid, tag: req.params.tag, content: req.params.content, date: date};
+    let sql = 'INSERT INTO folklore SET ?';
     let query = db.query(sql, post, (err, result) => {
-        // if(err) throw err;
+        if(err) res.status(400).json({error: err});
         console.log(result);
-        res.send('Post 1 added...');
-    });
-});
-
-// Insert post 2
-app.get('/addpost2', (req, res) => {
-    let post = {title:'Post Two', body:'This is post number two'};
-    let sql = 'INSERT INTO posts SET ?';
-    let query = db.query(sql, post, (err, result) => {
-        // if(err) throw err;
-        console.log(result);
-        res.send('Post 2 added...');
+        res.status(200).json({result: result});
     });
 });
 
 // Select posts
-app.get('/getposts', (req, res) => {
-    let sql = 'SELECT * FROM posts';
+app.get('/searchtag/:tag', (req, res) => {
+    let sql = `SELECT tag FROM folklore WHERE tag LIKE '%${req.params.tag}%'`;
+    let ouput = [];
     let query = db.query(sql, (err, results) => {
-        // if(err) throw err;
+        if(err) res.status(400).json({error: err});
         console.log(results);
-        res.send('Posts fetched...');
+        res.status(200).json({result: results});
     });
 });
 
 // Select single post
-app.get('/getpost/:id', (req, res) => {
-    let sql = `SELECT * FROM posts WHERE id = ${req.params.id}`;
+app.get('/getrandomcontent', (req, res) => {
+    let sql = `SELECT DISTINCT content FROM folklore WHERE tag = ${req.params.tag}`;
     let query = db.query(sql, (err, result) => {
-        // if(err) throw err;
+        if(err) throw err;
         console.log(result);
         res.send('Post fetched...');
     });
@@ -86,7 +85,7 @@ app.get('/updatepost/:id', (req, res) => {
     let newTitle = 'Updated Title';
     let sql = `UPDATE posts SET title = '${newTitle}' WHERE id = ${req.params.id}`;
     let query = db.query(sql, (err, result) => {
-        // if(err) throw err;
+        if(err) throw err;
         console.log(result);
         res.send('Post updated...');
     });
@@ -97,7 +96,7 @@ app.get('/deletepost/:id', (req, res) => {
     let newTitle = 'Updated Title';
     let sql = `DELETE FROM posts WHERE id = ${req.params.id}`;
     let query = db.query(sql, (err, result) => {
-        // if(err) throw err;
+        if(err) throw err;
         console.log(result);
         res.send('Post deleted...');
     });
@@ -106,3 +105,4 @@ app.get('/deletepost/:id', (req, res) => {
 app.listen('3000', () => {
     console.log('Server started on port 3000');
 });
+
