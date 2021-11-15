@@ -4,7 +4,7 @@ import './App.css';
 import MainPage from "./containers/MainPage";
 
 import AddTagPage from "./containers/AddTagPage";
-import SearchPage from "./containers/SearchPage";
+import SearchPage from "./containers/SeaPage/SearchPage";
 import {BrowserRouter, Route, Routes,} from "react-router-dom";
 
 

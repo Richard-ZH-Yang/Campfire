@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import TagList from "./TagList";
 
 function AddTagPage() {
     const styles = {
@@ -23,7 +24,7 @@ function AddTagPage() {
     }
 
     return (
-
+        <div>
 <div style={styles.header}>
   <div style={styles.content}>
   <div class="container col-xl-10 col-xxl-8 px-4 py-5">
@@ -51,6 +52,8 @@ function AddTagPage() {
   </div>
   </div>
   </div>
+            <TagList/>
+        </div>
     )
 }
 

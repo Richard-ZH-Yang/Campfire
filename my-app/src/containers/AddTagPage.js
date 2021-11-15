@@ -24,7 +24,6 @@ function AddTagPage() {
     }
 
     return (
-
 <div style={styles.header}>
   <div style={styles.content}>
   <div class="container col-xl-10 col-xxl-8 px-4 py-5">
