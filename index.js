@@ -105,6 +105,7 @@ app.get('/getRandomTag', (req, res) => {
         res.status(200).json({result: results[randNum]})
         // res.send('Posts fetched...');
     });
+
 });
 
 // EFFECTS: get a random number between min and max inclusive
