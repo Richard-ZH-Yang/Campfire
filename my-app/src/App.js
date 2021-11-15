@@ -2,12 +2,15 @@
 import './App.css';
 
 import MainPage from "./containers/MainPage";
-import AddTagPage from "./containers/addTagPage";
+
+import AddTagPage from "./containers/AddTagPage";
 import {BrowserRouter, Route, Routes,} from "react-router-dom";
+
 
 function App() {
 
   return (
+
 
       <BrowserRouter>
           <Routes>
@@ -15,6 +18,7 @@ function App() {
               <Route path="/add" element={<AddTagPage />} />
           </Routes>
       </BrowserRouter>
+
   );
 }
 
