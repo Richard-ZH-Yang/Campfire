@@ -1,5 +1,6 @@
 
 import React from "react";
+import {Link} from "react-router-dom";
 
 function AddTagPage() {
     const styles = {
@@ -43,7 +44,9 @@ function AddTagPage() {
             <label for="newStory">Your story</label>
           </div>
           <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <button onClikc="./containers/MainPage" type="button" class="btn btn-primary btn-lg px-4 me-md-2">Back</button>
+              <Link to = '/'>
+                <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Back</button>
+              </Link>
             <button onClick={handleAdd} type="button" class="btn btn-outline-secondary btn-lg px-4">Submit</button>
         </div>
           <hr class="my-4"/>
