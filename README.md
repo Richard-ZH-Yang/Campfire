@@ -14,7 +14,7 @@ We use HTML, CSS and React.js for the frontend, Node.js, Express.js for the back
 All of us are beginners for building a website, and 12 hours time window is quite limited for building a fully functional website from scratch.
 
 ## Accomplishments that we're proud of
-Even though this project is not complete, we have completed the backend and almost completed the frontend. And the using new tech stack is very exciting
+Even though this project is not fully complete, we have completed the backend and almost completed the frontend. And the using new tech stack is very exciting
 
 ## What we learned
 MERN tech stack. Even though we used MySQL for the database as the backend group members are more familiar with MySQL, we plan to change the database to MongoDB in the future
